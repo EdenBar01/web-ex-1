@@ -1,101 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
- <meta charset="UTF-8">
- <meta http-equiv="X-UA-Compatible" content="IE=edge">
- <meta name="viewport" content="width=device-width, initial-scale=1.0">
- <title>Document</title>
- <style>
-  body{
-   font-family: Arial, Helvetica, sans-serif;
-  }
-  .container {
-   width: 300px; 
-   margin: 20px auto;
-   background-color: gainsboro;
-   padding: 5px;
-  }
-  .butt {
-   float: left;
-   text-align: center;
-   width: 50px;
-   margin: 5px;
-   background-color: white;
-   padding: 5px 0;
-   border-radius: 4px;
-   cursor: pointer;
-  }
-  .butt:hover {
-   background-color: blue;
-   color: white;
-  }
-  .result{
-   text-align: center;
-   width: auto;
-   margin: 5px;
-   background-color: white;
-   padding: 5px 0;
-   border-radius: 4px;
-   cursor: pointer;
-  }
-  .monitor{
-   background-color: black;
-   padding: 5px;
-   color: white;
-   margin: 5px;
-   border-radius: 4px;
-  }
- </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WEB Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Example for dark theme styling when using the tailwind CDN -->
+    <link rel="stylesheet" href="styles.css">
 </head>
-<body>
- <div style="text-align: center; font-size: 24px; color: blue;">Calculator</div>
- <div class="container">
-  <div class = "monitor">temp</div>
-  <div class="butt">1</div>
-  <div class="butt">2</div>
-  <div class="butt">3</div>
-  <div class="butt">4</div>
-  <div class="butt">5</div>
-  <div class="butt">6</div>
-  <div class="butt">7</div>
-  <div class="butt">8</div>
-  <div class="butt">9</div>
-  <div class="butt">0</div>
-  <div class="butt">+</div>
-  <div class="butt">-</div>
-  <div class="butt">*</div>
-  <div class="butt">/</div>
-  <div class="butt">**</div>
-  <div style="clear: both;"></div>
-  <div class="result">=</div>
- </div>
 
-     <!-- special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
-     <script>
-      // custom config for the MTW app 
-      const mtwAppConfig = {
-          border: true // app border in the MTW page                    
-      }
+<body class="dark:text-white light:text-black">
+    <div class="calculator">
+        <input type="text" id="display" readonly style="width: 100%; background-color: gainsboro; color: black; font-weight: bold; height: 30px;">
+        <script src="index_script.js"></script>
 
-      ///////////////////////////////////////////////////////
-      // implement this functions in order to use private API        
-      const sendPrivateApiRequest = async () => {
-          // your code here:
-          // sendRequestToParent({ cat: 'getAssets' })
-      }        
+        <div class="row">
+            <button class="operators" onclick="NotDefined()">MC</button>
+            <button class="operators" onclick="NotDefined()">MR</button>
+            <button class="operators" onclick="NotDefined()">M+</button>
+            <button class="operators" onclick="NotDefined()">M-</button>
+            <button class="operators" onclick="NotDefined()">MS</button>
+            <button class="operators" onclick="NotDefined()">M</button>
+        </div>
 
-      const acceptPrivateApiResponse = async (data) => {
-          // process received data here:
-          // console.log(data)
-      }
+        <div class="row">
+            <button class="operators" onclick="NotDefined()">2nd</button>
+            <button class="operators" onclick="pi()">π</button>
+            <button class="operators" onclick="e()">e</button>
+            <button class="operators" onclick="clearDisplay()">C</button>
+            <button class="operators" onclick="deleteLastFromDisplay()">⌫</button> 
+        </div>
 
-      // use this in order to send on document load
-      document.addEventListener('DOMContentLoaded', () => {
-          // your code here:
-          //sendRequestToParent({ method: 'getAssets' })
-      })
+        <div class="row">
+            <button class="operators" onclick="calculateSquare()">x²</button>
+            <button class="operators" onclick="calculateReciprocal()">1/x</button>
+            <button class="operators" onclick="absolute()">|x|</button>
+            <button class="operators" onclick="exponential()">exp</button>
+            <button class="operators" onclick="calculateMod()">mod</button>
+        </div>
 
-  </script>
-  <script src="https://morethanwallet.com/appstore/index.js"></script>
+        <div class="row">
+            <button class="operators" onclick="calculateSquareRoot()">²√x</button>
+            <button class="operators" onclick="addParenthesis2()">(</button>
+            <button class="operators" onclick="addParenthesis1()">)</button>
+            <button class="operators" onclick="calculateFactorial()">n!</button>
+            <button class="operators" onclick="appendToDisplay('/')">÷</button>
+        </div>
+
+        <div class="row">
+            <button class="operators" onclick="powxy()">x<sup>y</sup></button>
+            <button class="button" onclick="appendToDisplay('7')">7</button>
+            <button class="button" onclick="appendToDisplay('8')">8</button>
+            <button class="button" onclick="appendToDisplay('9')">9</button>
+            <button class="operators" onclick="appendToDisplay('*')">*</button>
+        </div>
+
+        <div class="row">
+            <button class="operators" onclick="appendToDisplay('10^')">10<sup>x</sup></button>
+            <button class="button" onclick="appendToDisplay('4')">4</button>
+            <button class="button" onclick="appendToDisplay('5')">5</button>
+            <button class="button" onclick="appendToDisplay('6')">6</button>
+            <button class="operators" onclick="appendToDisplay('-')">-</button>
+        </div>
+
+        <div class="row">
+            <button class="operators" onclick="log()">log</button>
+            <button class="button" onclick="appendToDisplay('1')">1</button>
+            <button class="button" onclick="appendToDisplay('2')">2</button>
+            <button class="button" onclick="appendToDisplay('3')">3</button>
+            <button class="operators" onclick="appendToDisplay('+')">+</button>
+        </div>
+
+        <div class="row">
+            <button class="operators" onclick="ln()">ln</button>
+            <button class="operators" onclick="plusMinus()">+/-</button>
+            <button class="button" onclick="appendToDisplay('0')">0</button>
+            <button class="operators" onclick="dot()">.</button>
+            <button class="button" onclick="calculateResult()">=</button>
+        </div>
+
+    </div>
+
+    <!-- Special scripts for integration in MTW gallery - must be placed at the bottom of the HTML after your code -->
+    <script>
+        // Custom config for the MTW app 
+        const mtwAppConfig = {
+            border: true // App border in the MTW page                    
+        }
+
+        // Implement these functions in order to use private API        
+        const sendPrivateApiRequest = async () => {
+            // Your code here:
+            // sendRequestToParent({ cat: 'getAssets' })
+        }
+
+        const acceptPrivateApiResponse = async (data) => {
+            // Process received data here:
+            // console.log(data)
+        }
+
+        // Use this in order to send on document load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Your code here:
+            // sendRequestToParent({ method: 'getAssets' })
+            // Function to append characters to the input
+    }); 
+
+    </script>
+    <script src="https://morethanwallet.com/appstore/index.js"></script>
 </body>
 </html>
